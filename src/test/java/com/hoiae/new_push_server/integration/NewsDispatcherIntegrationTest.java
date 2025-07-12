@@ -4,6 +4,7 @@ import com.hoiae.new_push_server.domain.News;
 import com.hoiae.new_push_server.queue.InMemoryNewQueue;
 import com.hoiae.new_push_server.repository.NewsRepository;
 import com.hoiae.new_push_server.websocket.NewsWebSocketHandler;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,5 +49,10 @@ class NewsDispatcherIntegrationTest {
         // then: 비동기 전송이므로 일정 시간 대기 후 검증
         await().atMost(3, SECONDS).untilAsserted(() ->
                 verify(session, times(1)).sendMessage(any()));
+    }
+
+    @AfterEach
+    void tearDown() {
+        newsRepository.deleteAll();
     }
 }

@@ -7,6 +7,8 @@ import com.hoiae.new_push_server.websocket.NewsWebSocketHandler;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +22,10 @@ public class NewsDispatcher {
     private final NewsWebSocketHandler webSocketHandler;
 
     @Async("newsExecutor")
-    @PostConstruct
+//    @PostConstruct
+    @EventListener(ApplicationReadyEvent.class)
     public void startDispatcher() {
+        log.info("Dispatcher started");
         while (true) {
             try {
                 String newsId = newsMessageQueue.receive(); // 블로킹

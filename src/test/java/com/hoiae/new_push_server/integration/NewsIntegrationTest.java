@@ -3,10 +3,10 @@ package com.hoiae.new_push_server.integration;
 import com.hoiae.new_push_server.domain.News;
 import com.hoiae.new_push_server.repository.NewsRepository;
 import com.hoiae.new_push_server.websocket.NewsWebSocketHandler;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@Transactional
 class NewsIntegrationTest {
 
     @Autowired
@@ -46,5 +45,10 @@ class NewsIntegrationTest {
 
         // then: 메시지 전송 확인
         verify(session, times(1)).sendMessage(any(TextMessage.class));
+    }
+
+    @AfterEach
+    void tearDown() {
+        newsRepository.deleteAll(); // 또는 deleteById("999")
     }
 }

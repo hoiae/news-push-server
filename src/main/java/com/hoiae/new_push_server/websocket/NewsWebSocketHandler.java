@@ -52,6 +52,8 @@ public class NewsWebSocketHandler extends TextWebSocketHandler {
     }
 
     public void broadcast(News news) {
+        log.info("Broadcasting news: {}", news.getId());
+
         Map<String, Object> newsMap = Map.of(
                 "id", news.getId(),
                 "title", news.getTitle(),
