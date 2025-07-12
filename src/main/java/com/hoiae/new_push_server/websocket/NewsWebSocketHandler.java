@@ -55,7 +55,7 @@ public class NewsWebSocketHandler extends TextWebSocketHandler {
         Map<String, Object> newsMap = Map.of(
                 "id", news.getId(),
                 "title", news.getTitle(),
-                "content", news.getContent(),
+                "body", news.getContent(),
                 "publishedAt", news.getPublishedAt()
         );
 
