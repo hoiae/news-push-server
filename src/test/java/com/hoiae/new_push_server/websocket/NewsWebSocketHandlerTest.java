@@ -25,6 +25,7 @@ class NewsWebSocketHandlerTest {
 
     private NewsWebSocketHandler handler;
     private WebSocketSession session;
+    private static final String ENDPOINT = "ws://localhost/ws/news?token=testToken";
 
     @BeforeEach
     void setUp() {
@@ -34,7 +35,7 @@ class NewsWebSocketHandlerTest {
 
     @Test
     void 연결_성공() throws Exception {
-        URI uri = new URI("ws://localhost?token=testToken");
+        URI uri = new URI(ENDPOINT);
         when(session.getUri()).thenReturn(uri);
 
         assertDoesNotThrow(() -> handler.afterConnectionEstablished(session));
@@ -42,7 +43,7 @@ class NewsWebSocketHandlerTest {
 
     @Test
     void 중복_토큰_연결시_예외발생() throws Exception {
-        URI uri = new URI("ws://localhost?token=testToken");
+        URI uri = new URI(ENDPOINT);
         when(session.getUri()).thenReturn(uri);
 
         handler.afterConnectionEstablished(session);
@@ -63,7 +64,7 @@ class NewsWebSocketHandlerTest {
 
     @Test
     void 뉴스_전송시_메시지가_모든_세션에_전송된다() throws Exception {
-        URI uri = new URI("ws://localhost?token=testToken");
+        URI uri = new URI(ENDPOINT);
         when(session.getUri()).thenReturn(uri);
         when(session.isOpen()).thenReturn(true);
 
@@ -84,7 +85,7 @@ class NewsWebSocketHandlerTest {
 
     @Test
     void 연결_종료시_세션이_제거된다() throws Exception {
-        URI uri = new URI("ws://localhost?token=testToken");
+        URI uri = new URI(ENDPOINT);
         when(session.getUri()).thenReturn(uri);
 
         // 연결된 상태로 추가
@@ -100,5 +101,25 @@ class NewsWebSocketHandlerTest {
         Map<String, WebSocketSession> clients = (Map<String, WebSocketSession>) clientsField.get(handler);
 
         assertFalse(clients.containsKey("testToken"));
+    }
+
+    @Test
+    void 뉴스_큐에서_꺼내_전송시_세션에_정상_전송된다() throws Exception {
+        // given
+        URI uri = new URI(ENDPOINT);
+        when(session.getUri()).thenReturn(uri);
+        when(session.isOpen()).thenReturn(true);
+
+        handler.afterConnectionEstablished(session);
+
+        // mock된 queue 대신 직접 뉴스 생성
+        News news = new News("1", "속보", "중요 뉴스", LocalDateTime.now());
+        doNothing().when(session).sendMessage(any(TextMessage.class));
+
+        // when
+        handler.broadcast(news); // consumer 없이 직접 broadcast 호출
+
+        // then
+        verify(session, times(1)).sendMessage(any(TextMessage.class));
     }
 }

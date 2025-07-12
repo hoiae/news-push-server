@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hoiae.new_push_server.domain.News;
 import com.hoiae.new_push_server.exception.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
+@Component
 public class NewsWebSocketHandler extends TextWebSocketHandler {
 
     private final Map<String, WebSocketSession> clients = new ConcurrentHashMap<>();
