@@ -22,7 +22,7 @@ public class News {
 
     private LocalDateTime publishedAt;
 
-    protected News(String id, String title, String content, LocalDateTime publishedAt){
+    public News(String id, String title, String content, LocalDateTime publishedAt){
         this.id = id;
         this.title = title;
         this.content = content;
