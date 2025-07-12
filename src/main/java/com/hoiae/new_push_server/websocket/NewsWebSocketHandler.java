@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hoiae.new_push_server.domain.News;
 import com.hoiae.new_push_server.exception.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -78,6 +79,17 @@ public class NewsWebSocketHandler extends TextWebSocketHandler {
         }
     }
 
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        URI uri = session.getUri();
+        if (uri != null && uri.getQuery() != null && uri.getQuery().contains("token=")) {
+            String token = extractToken(uri.getQuery());
+            clients.remove(token);
+            log.info("클라이언트 연결 종료됨: token={}", token);
+        } else {
+            log.warn("클라이언트 연결 종료 처리 중 토큰을 추출할 수 없음. uri={}", uri);
+        }
+    }
     private String extractToken(String query) {
         for (String param : query.split("&")) {
             if (param.startsWith("token=")) {

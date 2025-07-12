@@ -4,10 +4,13 @@ import com.hoiae.new_push_server.domain.News;
 import com.hoiae.new_push_server.exception.DuplicateConnectionException;
 import com.hoiae.new_push_server.exception.MissingTokenException;
 import com.hoiae.new_push_server.exception.SerializationFailureException;
+import java.lang.reflect.Field;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -77,5 +80,25 @@ class NewsWebSocketHandlerTest {
         }
 
         verify(session, atLeastOnce()).sendMessage(any(TextMessage.class));
+    }
+
+    @Test
+    void 연결_종료시_세션이_제거된다() throws Exception {
+        URI uri = new URI("ws://localhost?token=testToken");
+        when(session.getUri()).thenReturn(uri);
+
+        // 연결된 상태로 추가
+        handler.afterConnectionEstablished(session);
+
+        // 연결 해제
+        handler.afterConnectionClosed(session, CloseStatus.NORMAL);
+
+        // 해당 토큰이 clients에서 제거되었는지 검증
+        Field clientsField = NewsWebSocketHandler.class.getDeclaredField("clients");
+        clientsField.setAccessible(true);
+        @SuppressWarnings("unchecked")
+        Map<String, WebSocketSession> clients = (Map<String, WebSocketSession>) clientsField.get(handler);
+
+        assertFalse(clients.containsKey("testToken"));
     }
 }
