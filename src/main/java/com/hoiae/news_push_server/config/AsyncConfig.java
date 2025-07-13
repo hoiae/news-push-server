@@ -1,4 +1,4 @@
-package com.hoiae.new_push_server.config;
+package com.hoiae.news_push_server.config;
 
 import java.util.concurrent.Executor;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.hoiae.new_push_server.exception;
+package com.hoiae.news_push_server.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

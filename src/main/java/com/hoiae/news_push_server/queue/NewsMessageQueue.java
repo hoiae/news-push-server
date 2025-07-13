@@ -1,4 +1,4 @@
-package com.hoiae.new_push_server.queue;
+package com.hoiae.news_push_server.queue;
 
 public interface NewsMessageQueue {
     void send(String newsId);

@@ -1,11 +1,11 @@
-package com.hoiae.new_push_server.websocket;
+package com.hoiae.news_push_server.websocket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.hoiae.new_push_server.domain.News;
-import com.hoiae.new_push_server.exception.*;
+import com.hoiae.news_push_server.domain.News;
+import com.hoiae.news_push_server.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;

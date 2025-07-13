@@ -1,8 +1,8 @@
-package com.hoiae.new_push_server.integration;
+package com.hoiae.news_push_server.integration;
 
-import com.hoiae.new_push_server.domain.News;
-import com.hoiae.new_push_server.repository.NewsRepository;
-import com.hoiae.new_push_server.websocket.NewsWebSocketHandler;
+import com.hoiae.news_push_server.domain.News;
+import com.hoiae.news_push_server.repository.NewsRepository;
+import com.hoiae.news_push_server.websocket.NewsWebSocketHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

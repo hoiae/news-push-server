@@ -1,4 +1,4 @@
-package com.hoiae.new_push_server.queue;
+package com.hoiae.news_push_server.queue;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

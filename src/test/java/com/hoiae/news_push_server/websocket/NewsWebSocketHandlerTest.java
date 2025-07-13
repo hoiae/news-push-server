@@ -1,9 +1,9 @@
-package com.hoiae.new_push_server.websocket;
+package com.hoiae.news_push_server.websocket;
 
-import com.hoiae.new_push_server.domain.News;
-import com.hoiae.new_push_server.exception.DuplicateConnectionException;
-import com.hoiae.new_push_server.exception.MissingTokenException;
-import com.hoiae.new_push_server.exception.SerializationFailureException;
+import com.hoiae.news_push_server.domain.News;
+import com.hoiae.news_push_server.exception.DuplicateConnectionException;
+import com.hoiae.news_push_server.exception.MissingTokenException;
+import com.hoiae.news_push_server.exception.SerializationFailureException;
 import java.lang.reflect.Field;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +55,7 @@ class NewsWebSocketHandlerTest {
 
     @Test
     void 토큰_누락시_예외발생() throws Exception {
-        when(session.getUri()).thenReturn(new URI("ws://localhost"));
+        when(session.getUri()).thenReturn(new URI("ws://localhost/ws/news"));
 
         assertThrows(MissingTokenException.class, () -> {
             handler.afterConnectionEstablished(session);

@@ -1,4 +1,4 @@
-package com.hoiae.new_push_server.domain;
+package com.hoiae.news_push_server.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,10 +1,9 @@
-package com.hoiae.new_push_server.queue;
+package com.hoiae.news_push_server.queue;
 
-import com.hoiae.new_push_server.domain.News;
-import com.hoiae.new_push_server.exception.NewsNotFoundException;
-import com.hoiae.new_push_server.repository.NewsRepository;
-import com.hoiae.new_push_server.websocket.NewsWebSocketHandler;
-import jakarta.annotation.PostConstruct;
+import com.hoiae.news_push_server.domain.News;
+import com.hoiae.news_push_server.exception.NewsNotFoundException;
+import com.hoiae.news_push_server.repository.NewsRepository;
+import com.hoiae.news_push_server.websocket.NewsWebSocketHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

@@ -1,4 +1,4 @@
-package com.hoiae.new_push_server.exception;
+package com.hoiae.news_push_server.exception;
 
 public class BusinessException extends RuntimeException{
     private final ErrorCode errorCode;

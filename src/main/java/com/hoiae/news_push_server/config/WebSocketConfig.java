@@ -1,6 +1,6 @@
-package com.hoiae.new_push_server.config;
+package com.hoiae.news_push_server.config;
 
-import com.hoiae.new_push_server.websocket.NewsWebSocketHandler;
+import com.hoiae.news_push_server.websocket.NewsWebSocketHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
