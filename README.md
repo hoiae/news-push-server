@@ -42,3 +42,5 @@ public interface NewsMessageQueue {
 |--------|-------------------------------------|
 | `InMemoryNewsQueue` | LinkedBlockingQueue를 사용한 구현체, 현재 사용 |
 | `SqsNewsQueue` | SQS를 사용하기 위한 로직 추가 개발 후 사용 예정       |
+
+SQS 도입 시 `NewsMessageQueue`의 구현체만 교체하면 되며, 나머지 로직은 그대로 사용할 수 있습니다.
