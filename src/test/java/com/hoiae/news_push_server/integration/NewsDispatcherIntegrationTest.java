@@ -1,7 +1,7 @@
 package com.hoiae.news_push_server.integration;
 
 import com.hoiae.news_push_server.domain.News;
-import com.hoiae.news_push_server.queue.InMemoryNewQueue;
+import com.hoiae.news_push_server.queue.InMemoryNewsQueue;
 import com.hoiae.news_push_server.repository.NewsRepository;
 import com.hoiae.news_push_server.websocket.NewsWebSocketHandler;
 import org.junit.jupiter.api.AfterEach;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 class NewsDispatcherIntegrationTest {
 
     @Autowired
-    private InMemoryNewQueue queue;
+    private InMemoryNewsQueue queue;
 
     @Autowired
     private NewsRepository newsRepository;

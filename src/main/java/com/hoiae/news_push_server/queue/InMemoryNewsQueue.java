@@ -5,7 +5,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.springframework.stereotype.Component;
 
 @Component
-public class InMemoryNewQueue implements NewsMessageQueue{
+public class InMemoryNewsQueue implements NewsMessageQueue{
     private final BlockingQueue<String> queue = new LinkedBlockingQueue<>();
     @Override
     public void send(String newsId) {
